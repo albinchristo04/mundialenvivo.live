@@ -1,0 +1,95 @@
+{
+  "_note": "Official 2026 World Cup broadcasters for South America + Mexico. Verify live URLs and per-match channel allocation near kickoff (rights holders move individual games between channels). Every link here is an official rights holder — never substitute a third-party stream.",
+  "_lastVerified": "2026-06-09",
+  "regional": {
+    "DSports": {
+      "platform": "DGO (app/web)",
+      "url": "https://www.dgo.com",
+      "access": "pay",
+      "coverage": "Regional pay-TV across most of South America. EXCLUDES Brazil, Bolivia, Paraguay."
+    },
+    "ESPN_Disney": {
+      "platform": "Disney+ Premium / ESPN",
+      "url": "https://www.disneyplus.com",
+      "access": "pay",
+      "coverage": "National-team matches in Argentina, Colombia, Ecuador, Uruguay."
+    }
+  },
+  "countries": {
+    "AR": {
+      "name": "Argentina",
+      "broadcasters": [
+        {"name": "Telefe", "url": "https://mitelefe.com", "access": "free", "type": "tv+stream"},
+        {"name": "TV Pública", "url": "https://www.tvpublica.com.ar", "access": "free", "type": "tv", "stream": "Cont.ar"},
+        {"name": "TyC Sports", "url": "https://www.tycsports.com", "access": "pay", "type": "tv", "stream": "TyC Sports Play"},
+        {"name": "DSports", "url": "https://www.dgo.com", "access": "pay", "type": "stream"}
+      ]
+    },
+    "BR": {
+      "name": "Brasil",
+      "broadcasters": [
+        {"name": "CazéTV", "url": "https://www.youtube.com/@CazeTVoficial", "access": "free", "type": "stream", "note": "All 104 matches free on YouTube. Also free via Prime Video, Disney+, Samsung TV Plus, Sky+."},
+        {"name": "TV Globo / SporTV", "url": "https://globoplay.globo.com", "access": "free", "type": "tv+stream", "note": "Every Brazil game, opener, final, ~55 matches. Stream on Globoplay; ge tv free for 32 games."},
+        {"name": "SBT / N Sports", "url": "https://www.sbt.com.br", "access": "free", "type": "tv", "note": "32 matches free-to-air."}
+      ]
+    },
+    "CO": {
+      "name": "Colombia",
+      "broadcasters": [
+        {"name": "Caracol TV", "url": "https://www.caracoltv.com", "access": "free", "type": "tv", "stream": "Ditu"},
+        {"name": "RCN", "url": "https://www.canalrcn.com", "access": "free", "type": "tv"},
+        {"name": "Win Sports", "url": "https://www.winsports.co", "access": "pay", "type": "tv", "stream": "Win Sports Online"},
+        {"name": "DSports", "url": "https://www.dgo.com", "access": "pay", "type": "stream"}
+      ]
+    },
+    "EC": {
+      "name": "Ecuador",
+      "broadcasters": [
+        {"name": "ESPN / Disney+", "url": "https://www.disneyplus.com", "access": "pay", "type": "stream"},
+        {"name": "DSports", "url": "https://www.dgo.com", "access": "pay", "type": "stream"}
+      ]
+    },
+    "UY": {
+      "name": "Uruguay",
+      "broadcasters": [
+        {"name": "ESPN / Disney+", "url": "https://www.disneyplus.com", "access": "pay", "type": "stream"},
+        {"name": "DSports", "url": "https://www.dgo.com", "access": "pay", "type": "stream"}
+      ]
+    },
+    "CL": {
+      "name": "Chile",
+      "broadcasters": [
+        {"name": "DSports", "url": "https://www.dgo.com", "access": "pay", "type": "stream"}
+      ]
+    },
+    "PE": {
+      "name": "Perú",
+      "broadcasters": [
+        {"name": "DSports", "url": "https://www.dgo.com", "access": "pay", "type": "stream"}
+      ]
+    },
+    "VE": {
+      "name": "Venezuela",
+      "broadcasters": [
+        {"name": "DSports", "url": "https://www.dgo.com", "access": "pay", "type": "stream"}
+      ]
+    },
+    "BO": {
+      "name": "Bolivia",
+      "broadcasters": [],
+      "note": "EXCLUDED from the DSports regional deal. Verify local free-to-air rights holder before publishing — do not assume DGO carries it."
+    },
+    "PY": {
+      "name": "Paraguay",
+      "broadcasters": [],
+      "note": "EXCLUDED from the DSports regional deal. Verify local rights holder (e.g. Tigo Sports / local FTA) before publishing."
+    },
+    "MX": {
+      "name": "México",
+      "broadcasters": [
+        {"name": "TelevisaUnivision", "url": "https://vix.com", "access": "free+pay", "type": "tv+stream", "stream": "ViX"},
+        {"name": "TV Azteca", "url": "https://www.aztecadeportes.com", "access": "free", "type": "tv+stream"}
+      ]
+    }
+  }
+}
