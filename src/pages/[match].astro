@@ -1,0 +1,136 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/config/site";
+import { fixtures, multiTzBlock, formatDateEs } from "@/utils/fixtures";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return fixtures.map((f) => ({
+    params: { match: f.slug },
+    props: { fixture: f },
+  }));
+};
+
+const { fixture: f } = Astro.props;
+
+const title = `${f.teamA} vs ${f.teamB}: Dónde Ver en Vivo y a Qué Hora | Mundial 2026`;
+const desc = `¿Dónde ver ${f.teamA} vs ${f.teamB} en vivo? Horarios por país, transmisión gratis online en ${site.watchName}. ${f.teamA} vs ${f.teamB} ${f.teamA.toLowerCase().includes("argentina") || f.teamB.toLowerCase().includes("argentina") ? "— dónde ver en Argentina y toda Latinoamérica." : "Mundial 2026."}`;
+
+const tzBlock = multiTzBlock(f.date);
+const dateEs = formatDateEs(f.date);
+const isGroupStage = !!f.group;
+
+const faqs = [
+  {
+    q: `¿Dónde ver ${f.teamA} vs ${f.teamB} en vivo?`,
+    a: `Podés ver ${f.teamA} vs ${f.teamB} en vivo gratis en ${site.watchName} (${site.watchUrl}). Disponible en celular, tablet y PC.`,
+  },
+  {
+    q: `¿A qué hora juega ${f.teamA} vs ${f.teamB}?`,
+    a: `El partido ${f.teamA} vs ${f.teamB} se juega el ${dateEs}. Horarios: ${tzBlock}.`,
+  },
+  {
+    q: `¿Es gratis ver ${f.teamA} vs ${f.teamB}?`,
+    a: `Sí, podés ver ${f.teamA} vs ${f.teamB} gratis en ${site.watchName}. Sin registro, sin pago.`,
+  },
+];
+
+const breadcrumbs = [
+  { name: "Inicio", item: site.url },
+  { name: "Mundial 2026", item: `${site.url}/calendario` },
+  { name: `${f.teamA} vs ${f.teamB}` },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={desc}
+  canonical={`${site.url}/${f.slug}`}
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  match={{ teamA: f.teamA, teamB: f.teamB, date: f.date, venue: f.venue, city: f.city, slug: f.slug }}
+>
+  <h1>¿Dónde Ver {f.teamA} vs {f.teamB} en Vivo? — Mundial 2026</h1>
+
+  <!-- Answer above the fold -->
+  <div class="match-card" style="background:#f9fafb">
+    <div class="teams" style="font-size:1.35rem">{f.teamA} vs {f.teamB}</div>
+    <div class="meta" style="margin:.3rem 0">{dateEs} · {f.venue}, {f.city}</div>
+    {isGroupStage && <div class="meta">Grupo {f.group} — Fecha {f.matchday}</div>}
+    <div class="tz-block" style="margin:.5rem 0">{tzBlock}</div>
+    <a href={site.watchUrl} class="cta" rel="nofollow noopener" target="_blank" style="margin-top:.5rem">
+      ▶ Ver {f.teamA} vs {f.teamB} en Vivo — {site.watchName}
+    </a>
+  </div>
+
+  <h2>¿Dónde Ver {f.teamA} vs {f.teamB} Gratis en Línea?</h2>
+  <p>
+    La mejor opción para ver <strong>{f.teamA} vs {f.teamB} en vivo gratis</strong> es
+    <a href={site.watchUrl} rel="nofollow noopener" target="_blank">{site.watchName}</a>.
+    La transmisión funciona en cualquier dispositivo conectado a internet: celular Android o iPhone, tablet, computadora o Smart TV.
+    No necesitás registrarte ni instalar nada.
+  </p>
+
+  <h2>Horarios por País — {f.teamA} vs {f.teamB}</h2>
+  <div class="tz-block">
+    {tzBlock}
+  </div>
+  <table>
+    <thead>
+      <tr><th>País</th><th>Horario local</th><th>Canal / Plataforma</th></tr>
+    </thead>
+    <tbody>
+      {[
+        { pais: "🇦🇷 Argentina",  offset: -3 },
+        { pais: "🇺🇾 Uruguay",    offset: -3 },
+        { pais: "🇧🇷 Brasil",     offset: -3 },
+        { pais: "🇨🇱 Chile",      offset: -4 },
+        { pais: "🇻🇪 Venezuela",  offset: -4 },
+        { pais: "🇨🇴 Colombia",   offset: -5 },
+        { pais: "🇵🇪 Perú",       offset: -5 },
+        { pais: "🇪🇨 Ecuador",    offset: -5 },
+        { pais: "🇲🇽 México",     offset: -6 },
+      ].map(({ pais, offset }) => {
+        const d = new Date(f.date);
+        const local = new Date(d.getTime() + offset * 3600_000);
+        const hh = String(local.getUTCHours()).padStart(2, "0");
+        const mm = String(local.getUTCMinutes()).padStart(2, "0");
+        return (
+          <tr>
+            <td>{pais}</td>
+            <td>{hh}:{mm} hs</td>
+            <td><a href={site.watchUrl} rel="nofollow noopener" target="_blank">{site.watchName}</a></td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+
+  <h2>Cómo Ver {f.teamA} vs {f.teamB} Online Gratis</h2>
+  <p>
+    Para ver <strong>{f.teamA} vs {f.teamB} transmisión en vivo gratis</strong>, seguí estos pasos:
+  </p>
+  <ol style="padding-left:1.5rem;line-height:2">
+    <li>Abrí <a href={site.watchUrl} rel="nofollow noopener" target="_blank">{site.watchName}</a> en tu celular o computadora.</li>
+    <li>Buscá el partido {f.teamA} vs {f.teamB} en la grilla de canales.</li>
+    <li>Hacé clic en "Ver en vivo" minutos antes del inicio del partido.</li>
+    <li>¡Disfrutá el partido gratis en HD!</li>
+  </ol>
+
+  <a href={site.watchUrl} class="cta" rel="nofollow noopener" target="_blank">
+    ▶ Ver {f.teamA} vs {f.teamB} Ahora — {site.watchName}
+  </a>
+
+  <!-- FAQ -->
+  <h2>Preguntas Frecuentes — {f.teamA} vs {f.teamB}</h2>
+  {faqs.map(({ q, a }) => (
+    <div>
+      <h3>{q}</h3>
+      <p>{a}</p>
+    </div>
+  ))}
+
+  <p style="margin-top:1.5rem">
+    ← <a href="/calendario">Ver calendario completo Mundial 2026</a>
+  </p>
+</BaseLayout>

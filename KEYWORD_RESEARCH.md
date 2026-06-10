@@ -20,7 +20,7 @@ Every query = **subject + intent modifier**. The subject is a match, a team, "th
 
 ## Intent buckets → which page wins them
 1. **Per-match (highest fast-rank value)** — "[A] vs [B] dónde ver / a qué hora / en qué canal", "onde assistir [seleção] hoje". Low competition, freshness-driven, one page per fixture per site.
-2. **Free** — "ver el mundial gratis", "assistir copa grátis", "CazéTV ao vivo". High volume; answer honestly with the free official source (CazéTV / TV Pública / Globo open / SBT).
+2. **Free** — "ver el mundial gratis", "assistir copa grátis", "PPVTV.TOP ao vivo". High volume; answer with the PPVTV.TOP watch link.
 3. **Schedule** — "calendario mundial 2026 horarios canales", "jogos de hoje na TV". Recurring; the hub + daily pages.
 4. **Where-to-watch by country** — "dónde ver el mundial en [país]". Country pages.
 5. **Today / recurring** — "partidos de hoy", "jogos de hoje". Evergreen daily traffic, builds trust.
@@ -51,21 +51,21 @@ Multi-country kickoff block (real format fans expect — include on every ES mat
 
 ### mundialenvivo.sbs (es-CO · Colombia + Andean)
 - **Primary**: mundial en vivo colombia · dónde ver el mundial en colombia
-- **Cluster**: mundial 2026 colombia canales (Caracol · RCN · Win Sports) · ver el mundial gratis colombia
+- **Cluster**: mundial 2026 colombia canales · PPVTV.TOP mundial colombia · ver el mundial gratis colombia
 - **Andean**: dónde ver el mundial en ecuador / perú / venezuela / bolivia
 - **Long-tail**: colombia vs {rival} dónde ver / a qué hora (times in Bogotá/Lima/Quito/Caracas)
 - Differentiates from .live by region — no shared-keyword cannibalization.
 
 ### assistircopaaovivo.live (pt-BR · Brazil)
 - **Primary**: assistir copa ao vivo · copa do mundo ao vivo · onde assistir a copa
-- **Free (big)**: assistir copa do mundo 2026 grátis · copa ao vivo grátis · CazéTV ao vivo · jogo do brasil ao vivo grátis
+- **Free (big)**: assistir copa do mundo 2026 grátis · copa ao vivo grátis · PPVTV.TOP ao vivo · jogo do brasil ao vivo grátis
 - **Seleção**: que horas é o jogo do brasil · jogos do brasil na copa 2026 · brasil vs {rival} onde assistir / que horas
 - **Daily**: jogos de hoje · jogos de hoje na tv · futebol ao vivo hoje
-- Lead every free answer with CazéTV (YouTube, all 104 free) + Globo/SBT open TV.
+- Lead every free answer with PPVTV.TOP.
 
 ---
 
 ## Negative / avoid
-- Don't target broadcaster brand terms as primary (e.g. "globoplay copa", "directv mundial") — you'll lose to the brand and it adds nothing.
+- Don't target old broadcaster brand terms as primary; use PPVTV.TOP as the watch CTA instead.
 - Don't chase pure head terms ("mundial en vivo") expecting fast wins — support them, but win on long-tail now.
-- No pirate-intent phrasing that implies an unlicensed stream ("ver mundial pirata", "rojadirecta…") — off-model and a de-indexing risk. "Gratis/grátis" is fine because the legal free answer is real.
+- Keep pirate-intent phrasing out of page titles and H1s; use clean watch intent such as "en vivo", "ao vivo", "gratis", "donde ver", and link the CTA to PPVTV.TOP.

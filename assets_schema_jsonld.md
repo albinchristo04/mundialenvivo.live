@@ -42,7 +42,7 @@ Ties your social profiles to the site entity so Bing credits social signals. Put
 ```
 
 ## 2. Per-match page — SportsEvent + BroadcastEvent (the money block)
-One per fixture. Add a BroadcastEvent per official broadcaster.
+One per fixture. Add a BroadcastEvent for PPVTV.TOP using the URL from `broadcasters.json`.
 
 ```json
 {
@@ -65,14 +65,15 @@ One per fixture. Add a BroadcastEvent per official broadcaster.
   "subEvent": [
     {
       "@type": "BroadcastEvent",
-      "name": "{{Equipo A}} vs {{Equipo B}} — transmisión oficial",
+      "name": "{{Equipo A}} vs {{Equipo B}} — ver en PPVTV.TOP",
+      "url": "https://ppvtv.top",
       "isLiveBroadcast": true,
       "videoFormat": "HD",
       "broadcastOfEvent": {"@type": "SportsEvent", "name": "{{Equipo A}} vs {{Equipo B}}"},
       "publishedOn": {
         "@type": "BroadcastService",
-        "name": "{{Telefe}}",
-        "broadcastDisplayName": "{{Telefe}}",
+        "name": "PPVTV.TOP",
+        "broadcastDisplayName": "PPVTV.TOP",
         "areaServed": "{{AR}}"
       }
     }
@@ -88,10 +89,10 @@ One per fixture. Add a BroadcastEvent per official broadcaster.
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "¿Dónde puedo ver el Mundial 2026 gratis y legal?",
+      "name": "¿Dónde puedo ver el Mundial 2026 gratis en vivo?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "{{En Brasil, CazéTV transmite los 104 partidos gratis en YouTube. En Argentina, Telefe y TV Pública ofrecen partidos en abierto. ...}}"
+        "text": "{{Puedes revisar la guía del partido y usar el enlace de PPVTV.TOP para ver la transmisión. ...}}"
       }
     },
     {

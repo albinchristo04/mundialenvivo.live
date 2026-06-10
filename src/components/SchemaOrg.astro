@@ -1,0 +1,119 @@
+---
+import { site } from "@/config/site";
+
+export interface Props {
+  /** Extra schema blocks for this specific page (SportsEvent, FAQPage, etc.) */
+  extra?: object[];
+  breadcrumbs?: { name: string; item?: string }[];
+  faqs?: { q: string; a: string }[];
+  match?: {
+    teamA: string;
+    teamB: string;
+    date: string;
+    venue: string;
+    city: string;
+    slug: string;
+  };
+}
+
+const { extra = [], breadcrumbs, faqs, match } = Astro.props;
+
+const graphs: object[] = [
+  {
+    "@type": "Organization",
+    "@id": `${site.url}/#org`,
+    name: site.brand,
+    url: `${site.url}/`,
+    logo: `${site.url}/logo.png`,
+    sameAs: [
+      `https://www.instagram.com/${site.social.instagram}`,
+      `https://www.facebook.com/${site.social.facebook}`,
+      `https://x.com/${site.social.x}`,
+      `https://www.youtube.com/@${site.social.youtube}`,
+    ],
+  },
+  {
+    "@type": "WebSite",
+    "@id": `${site.url}/#website`,
+    url: `${site.url}/`,
+    name: site.brand,
+    inLanguage: site.lang,
+    publisher: { "@id": `${site.url}/#org` },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${site.url}/buscar?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  },
+];
+
+if (match) {
+  graphs.push({
+    "@type": "SportsEvent",
+    name: `${match.teamA} vs ${match.teamB} — Mundial 2026`,
+    sport: "Soccer",
+    startDate: match.date,
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+    location: {
+      "@type": "Place",
+      name: match.venue,
+      address: match.city,
+    },
+    competitor: [
+      { "@type": "SportsTeam", name: match.teamA },
+      { "@type": "SportsTeam", name: match.teamB },
+    ],
+    subEvent: [
+      {
+        "@type": "BroadcastEvent",
+        name: `${match.teamA} vs ${match.teamB} — ver en ${site.watchName}`,
+        url: site.watchUrl,
+        isLiveBroadcast: true,
+        videoFormat: "HD",
+        broadcastOfEvent: {
+          "@type": "SportsEvent",
+          name: `${match.teamA} vs ${match.teamB}`,
+        },
+        publishedOn: {
+          "@type": "BroadcastService",
+          name: site.watchName,
+          broadcastDisplayName: site.watchName,
+          areaServed: "AR",
+        },
+      },
+    ],
+  });
+}
+
+if (faqs && faqs.length > 0) {
+  graphs.push({
+    "@type": "FAQPage",
+    mainEntity: faqs.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  });
+}
+
+if (breadcrumbs && breadcrumbs.length > 0) {
+  graphs.push({
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbs.map((bc, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: bc.name,
+      ...(bc.item ? { item: bc.item } : {}),
+    })),
+  });
+}
+
+for (const block of extra) {
+  graphs.push(block);
+}
+
+const jsonld = JSON.stringify({ "@context": "https://schema.org", "@graph": graphs });
+---
+
+<script type="application/ld+json" set:html={jsonld} />

@@ -1,0 +1,116 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/config/site";
+import { upcomingFixtures, groupFixtures, multiTzBlock, formatDateEs } from "@/utils/fixtures";
+
+const next = upcomingFixtures(8);
+const allGroup = groupFixtures();
+
+const faqs = [
+  {
+    q: "¿Dónde puedo ver el Mundial 2026 gratis en vivo?",
+    a: `Podés ver el Mundial 2026 en vivo de forma gratuita en ${site.watchName} (${site.watchUrl}). Funciona en celular, tablet y computadora sin necesidad de registro.`,
+  },
+  {
+    q: "¿A qué hora juega Argentina en el Mundial 2026?",
+    a: "Los horarios de Argentina se actualizan en cada página de partido. En general los partidos de la fase de grupos se juegan entre las 14:00 y las 21:00 hs (ARG). Revisá el calendario para el horario exacto.",
+  },
+  {
+    q: "¿Cuándo empieza el Mundial 2026?",
+    a: "El Mundial 2026 comienza el 11 de junio de 2026 con el partido inaugural en el Estadio Azteca, Ciudad de México.",
+  },
+  {
+    q: "¿Cuántos equipos juegan el Mundial 2026?",
+    a: "El Mundial 2026 cuenta con 48 selecciones divididas en 12 grupos de 4 equipos, con un total de 104 partidos.",
+  },
+];
+
+const breadcrumbs = [{ name: "Inicio", item: site.url }];
+---
+
+<BaseLayout
+  title="Mundial en Vivo 2026: Dónde Ver Todos los Partidos | Guía Oficial"
+  description="Ver el mundial en vivo 2026 gratis online. Guía completa: horarios por país, dónde ver cada partido en Argentina, Colombia, Uruguay y más. Transmisión en PPVTV.TOP."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <h1>Mundial en Vivo 2026 — Dónde Verlo en Cada País</h1>
+  <p>
+    Bienvenido a la guía oficial para ver el <strong>Mundial 2026 en vivo</strong> online. Encontrás horarios por país,
+    el canal donde pasan cada partido y el enlace directo para ver la transmisión gratis en
+    <a href={site.watchUrl} rel="nofollow noopener" target="_blank">{site.watchName}</a>.
+  </p>
+
+  <a href={site.watchUrl} class="cta" rel="nofollow noopener" target="_blank">
+    ▶ Ver el Mundial en Vivo — {site.watchName}
+  </a>
+
+  <!-- Próximos partidos -->
+  <h2>Próximos Partidos — Mundial 2026</h2>
+  {next.length === 0 ? (
+    <p>Los horarios se actualizan cada mañana de partido.</p>
+  ) : (
+    next.map((f) => (
+      <div class="match-card">
+        <div class="teams">
+          <a href={`/${f.slug}`}>{f.teamA} vs {f.teamB}</a>
+        </div>
+        <div class="meta">{formatDateEs(f.date)} · {f.venue}, {f.city}</div>
+        <div class="tz-block">{multiTzBlock(f.date)}</div>
+        <a href={`/${f.slug}`} style="font-size:.9rem">¿Dónde ver? →</a>
+      </div>
+    ))
+  )}
+
+  <!-- Selector por país -->
+  <h2>¿Dónde Ver el Mundial 2026 por País?</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>País</th>
+        <th>Plataforma gratuita</th>
+        <th>Ver ahora</th>
+      </tr>
+    </thead>
+    <tbody>
+      {[
+        { country: "🇦🇷 Argentina", slug: "/argentina" },
+        { country: "🇨🇴 Colombia",  slug: "/colombia"  },
+        { country: "🇺🇾 Uruguay",   slug: "/uruguay"   },
+        { country: "🇪🇨 Ecuador",   slug: "/ecuador"   },
+        { country: "🇨🇱 Chile",     slug: "/chile"     },
+        { country: "🇵🇪 Perú",      slug: "/peru"      },
+        { country: "🇻🇪 Venezuela", slug: "/venezuela" },
+        { country: "🇲🇽 México",    slug: "/mexico"    },
+      ].map(({ country, slug }) => (
+        <tr>
+          <td>{country}</td>
+          <td>{site.watchName}</td>
+          <td><a href={slug}>Guía →</a></td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <!-- FAQ -->
+  <h2>Preguntas Frecuentes — Mundial 2026 en Vivo</h2>
+  {faqs.map(({ q, a }) => (
+    <div>
+      <h3>{q}</h3>
+      <p>{a}</p>
+    </div>
+  ))}
+
+  <h2>Mundial en Vivo en Argentina</h2>
+  <p>
+    Desde Argentina podés ver todos los partidos del <strong>Mundial 2026 en vivo gratis</strong> en
+    <a href={site.watchUrl} rel="nofollow noopener" target="_blank">{site.watchName}</a>.
+    Los horarios se muestran en hora argentina (UTC−3). Visitá la <a href="/argentina">guía de Argentina</a> para el calendario completo.
+  </p>
+
+  <h2>Mundial en vivo en Colombia</h2>
+  <p>
+    Para ver el Mundial desde Colombia, usá el enlace de <a href={site.watchUrl} rel="nofollow noopener" target="_blank">{site.watchName}</a>.
+    Los horarios en Colombia (UTC−5) los encontrás en la <a href="/colombia">página de Colombia</a>.
+  </p>
+</BaseLayout>

@@ -3,7 +3,7 @@
 ## Role of this domain in the network
 **Primary Spanish-language "where to watch" hub** for the 2026 World Cup, pan-Hispanic South America (Argentina-led, plus regional). This is the flagship of the four sites. Target literal query: **"mundial en vivo"** / **"ver el mundial en vivo"**.
 
-> Model: legitimate where-to-watch / broadcaster-affiliate guide. We link OUT to official rights holders. We do NOT host, embed, or link to any unlicensed stream.
+> Model: where-to-watch / broadcaster-link guide. Every watch/ver CTA links OUT to `https://ppvtv.top`. We do NOT host, embed, or expose m3u8 stream URLs on this site.
 
 ## Target keyword clusters (Bing, es-AR) — grounded in live query data
 Pattern: subject + intent modifier. Win per-match long-tail now; support head terms.
@@ -14,7 +14,7 @@ Pattern: subject + intent modifier. Win per-match long-tail now; support head te
 - **Modifiers to place literally in title/H1/first-100-words**: en vivo · en directo · online · gratis · dónde ver · a qué hora · qué canal
 - **Question-format headings** (~22% more Bing visibility): "¿Dónde ver {A} vs {B} en vivo?", "¿A qué hora juega Argentina?"
 - **Include the multi-country kickoff block** on every match page: `20:00 (ARG/URU) · 19:00 (CHI/VEN) · 18:00 (COL/PER/ECU) · 17:00 (CDMX)`
-- **Avoid**: broadcaster brand terms as primary; pirate-intent phrasing. "Gratis" is fine — the legal free answer (TV Pública open) is real.
+- **Avoid**: broadcaster brand terms as primary. "Gratis" is fine; every free/watch answer should resolve to PPVTV.TOP.
 
 ## Bing-first SEO requirements (apply on every page)
 Bing rewards literal exact-match more than Google, so be deliberate:
@@ -23,7 +23,7 @@ Bing rewards literal exact-match more than Google, so be deliberate:
 - **First 100 words** must contain the exact phrase naturally.
 - **Meta description**: write it deliberately (Bing rarely rewrites it), include the phrase + a country list.
 - **H2/H3** target country variants: "Mundial en vivo en Argentina", "...en Colombia", etc.
-- **Image alt text**: include keyword + broadcaster name.
+- **Image alt text**: include keyword + PPVTV.TOP where the image supports a watch CTA.
 - **Structured data** (JSON-LD): `SportsEvent` for the tournament + `BroadcastEvent` per match where possible; `FAQPage` on the FAQ block. Bing weights schema ~30% more than Google.
 - **Freshness**: a "próximos partidos / horarios" block updated as the schedule firms up. Bing applies strong freshness weighting to event queries.
 - **Submit** XML sitemap to Bing Webmaster Tools; confirm Bingbot crawl access; use IndexNow for instant submission of new/updated pages.
@@ -31,16 +31,14 @@ Bing rewards literal exact-match more than Google, so be deliberate:
 
 ## Page structure
 1. **Home / hub** (`/`): "Mundial en vivo 2026 — dónde verlo". Intro, country selector, next-matches block, FAQ.
-2. **Country pages** (`/argentina`, `/colombia`, `/ecuador`, `/uruguay`, `/chile`, `/peru`, `/venezuela`): each lists that country's OFFICIAL broadcasters with outbound links, free vs pay, app names, kickoff times in local TZ.
+2. **Country pages** (`/argentina`, `/colombia`, `/ecuador`, `/uruguay`, `/chile`, `/peru`, `/venezuela`): each lists PPVTV.TOP as the broadcaster/watch link, plus kickoff times in local TZ.
 3. **Calendario / horarios** (`/calendario`): full fixture list with local times. High-freshness page.
-4. **FAQ** (`/faq`): "¿Dónde puedo ver el Mundial gratis y legal?" etc.
+4. **FAQ** (`/faq`): "¿Dónde puedo ver el Mundial gratis en vivo?" etc.
 
-## Official broadcasters to link out to (verify URLs at build time)
-- **Argentina**: Telefe (telefe.com), TV Pública, TyC Sports (tycsports.com), DSports via DGO (dgo.com), ESPN/Disney+ for national-team matches.
-- **Colombia**: Caracol TV (caracoltv.com), RCN, Win Sports (winsports.co), DGO, Disney+/ESPN.
-- **Ecuador / Uruguay**: ESPN/Disney+, DSports (DGO).
-- **Chile / Peru / Venezuela**: DSports (DGO) — regional pay-TV holder ex-Brazil/Bolivia/Paraguay.
-- Always label clearly: "transmisión oficial". Link directly to the broadcaster's own site/app, never to a third-party stream.
+## Broadcaster link target
+- **All countries / all sites**: PPVTV.TOP (`https://ppvtv.top`).
+- Always route watch/ver/assistir CTAs through `broadcasters.json`; do not hard-code old broadcaster URLs in templates.
+- Label CTAs clearly as `Ver en PPVTV.TOP` or the local-language equivalent.
 
 ## Internal linking (do this carefully — Bing penalizes link rings)
 - Link to the other three sites ONLY where contextually genuine, with descriptive anchor text, inside body content — not a sitewide footer block of exact-match anchors.
@@ -49,14 +47,14 @@ Bing rewards literal exact-match more than Google, so be deliberate:
 - Max 1–2 cross-site links per page, varied anchors. No reciprocal footer ring.
 
 ## Outbound authority links
-Link to FIFA's official media/where-to-watch page and the broadcasters above. Bing values relevant high-authority outbound links.
+Link to FIFA's official media/where-to-watch page for authority context, and use PPVTV.TOP for every watch CTA.
 
 ## Tech stack (Astro + Cloudflare Pages + GitHub Actions)
 - **Framework**: Astro, static output (`output: 'static'`). Zero client JS by default; use an Astro island (`client:visible`) only where a component truly needs it.
 - **Per-site config**: one `site.config.ts` holds what differs between the four domains — domain, brand, `<html lang>` (here `es-AR`), watch verb (`ver`), slug suffix (`donde-ver`), focus countries (AR + pan-Hispanic), social handles. Selected via `SITE` env var at build. Everything else is shared across the repo.
-- **Content/data**: Astro content collections. `fixtures.json` (all matches) + `broadcasters.json` (official rights holders per country). Per-match pages via `getStaticPaths()`, filtered/ordered by this site's focus countries.
-- **Per-match page**: route `/[teamA]-vs-[teamB]-donde-ver`. Title/H1 = exact long-tail query. First 100 words = date, local kickoff, official channel, free/pay. JSON-LD SportsEvent + BroadcastEvent injected in `<head>`.
-- **Schema**: inject the blocks from `assets_schema_jsonld.md` per route; pull broadcaster names/URLs from `broadcasters.json` so BroadcastEvent is accurate.
+- **Content/data**: Astro content collections. `fixtures.json` (all matches) + `broadcasters.json` (PPVTV.TOP broadcaster link per country). Per-match pages via `getStaticPaths()`, filtered/ordered by this site's focus countries.
+- **Per-match page**: route `/[teamA]-vs-[teamB]-donde-ver`. Title/H1 = exact long-tail query. First 100 words = date, local kickoff, PPVTV.TOP watch link, free/pay label. JSON-LD SportsEvent + BroadcastEvent injected in `<head>`.
+- **Schema**: inject the blocks from `assets_schema_jsonld.md` per route; pull broadcaster names/URLs from `broadcasters.json` so BroadcastEvent uses PPVTV.TOP.
 - **Styling**: minimal CSS, inline critical CSS, system or one preloaded font. Sub-1s mobile LCP. The match answer (channel + kickoff) sits above the fold.
 - **Sitemap**: `@astrojs/sitemap` auto-generated; submit to Bing Webmaster Tools.
 - **IndexNow key**: host `/<key>.txt` at site root (place in `/public`).
@@ -68,5 +66,5 @@ Link to FIFA's official media/where-to-watch page and the broadcasters above. Bi
 Wire the footer + share buttons to the Instagram World Cup page. Bing uses social shares (FB/X/LinkedIn) as a direct ranking input — push real engagement at the country pages.
 
 ## Hard constraints
-- No embedded players, no m3u8, no links to unlicensed streams, no "ver gratis" pages that resolve to a stream.
-- Every "watch" CTA resolves to an official broadcaster.
+- No embedded players and no exposed m3u8 links on this site.
+- Every "watch"/"ver"/"assistir" CTA resolves to `https://ppvtv.top`.

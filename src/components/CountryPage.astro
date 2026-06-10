@@ -1,0 +1,117 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/config/site";
+import { fixtures, formatDateEs } from "@/utils/fixtures";
+
+export interface Props {
+  countryName: string;
+  countryCode: string;
+  teamName: string;
+  tzLabel: string;
+  tzOffset: number;
+  slug: string;
+  flag: string;
+}
+
+const { countryName, countryCode, teamName, tzLabel, tzOffset, slug, flag } = Astro.props;
+
+const teamMatches = fixtures.filter(
+  (f) =>
+    f.teamA.toLowerCase().includes(teamName.toLowerCase()) ||
+    f.teamB.toLowerCase().includes(teamName.toLowerCase())
+);
+
+const allMatches = fixtures
+  .filter((f) => f.group !== null)
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+const localHour = (iso: string) => {
+  const d = new Date(iso);
+  const local = new Date(d.getTime() + tzOffset * 3600_000);
+  return `${String(local.getUTCHours()).padStart(2, "0")}:${String(local.getUTCMinutes()).padStart(2, "0")} hs`;
+};
+
+const breadcrumbs = [
+  { name: "Inicio", item: site.url },
+  { name: `Mundial 2026 en ${countryName}`, item: `${site.url}/${slug}` },
+];
+
+const faqs = [
+  {
+    q: `¿Dónde ver el Mundial 2026 en ${countryName}?`,
+    a: `Podés ver el Mundial 2026 en ${countryName} gratis en ${site.watchName} (${site.watchUrl}). Sin registro, funciona en celular, tablet y PC.`,
+  },
+  {
+    q: `¿A qué hora juegan los partidos del Mundial 2026 en ${countryName}?`,
+    a: `Los horarios del Mundial 2026 en ${countryName} (${tzLabel}) se muestran en la tabla de esta página. Cada partido tiene su hora local.`,
+  },
+];
+---
+
+<BaseLayout
+  title={`Dónde Ver el Mundial 2026 en ${countryName} — Horarios y Canales ${flag}`}
+  description={`Guía completa para ver el Mundial 2026 en ${countryName}: horarios en ${tzLabel}, dónde ver cada partido gratis online en ${site.watchName}. Incluye partidos de ${teamName}.`}
+  canonical={`${site.url}/${slug}`}
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <h1>Mundial en Vivo en {countryName} {flag} — Dónde Ver el Mundial 2026</h1>
+  <p>
+    Guía completa para ver el <strong>Mundial 2026 en vivo en {countryName}</strong>. Todos los partidos disponibles
+    gratis en <a href={site.watchUrl} rel="nofollow noopener" target="_blank">{site.watchName}</a>.
+    Horarios en {tzLabel}.
+  </p>
+
+  <a href={site.watchUrl} class="cta" rel="nofollow noopener" target="_blank">
+    ▶ Ver el Mundial en {countryName} — {site.watchName}
+  </a>
+
+  {teamMatches.length > 0 && (
+    <>
+      <h2>Partidos de {teamName} — Mundial 2026</h2>
+      <table>
+        <thead>
+          <tr><th>Partido</th><th>Fecha</th><th>Hora ({tzLabel})</th><th>Ver</th></tr>
+        </thead>
+        <tbody>
+          {teamMatches.map((m) => (
+            <tr>
+              <td><a href={`/${m.slug}`}>{m.teamA} vs {m.teamB}</a></td>
+              <td>{formatDateEs(m.date).split(",")[0]}</td>
+              <td>{localHour(m.date)}</td>
+              <td><a href={site.watchUrl} rel="nofollow noopener" target="_blank">Ver ▶</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )}
+
+  <h2>Todos los Partidos del Mundial 2026 — Horario {countryName}</h2>
+  <table>
+    <thead>
+      <tr><th>Partido</th><th>Grupo</th><th>Hora ({tzLabel})</th><th>Ver</th></tr>
+    </thead>
+    <tbody>
+      {allMatches.slice(0, 24).map((m) => (
+        <tr>
+          <td><a href={`/${m.slug}`}>{m.teamA} vs {m.teamB}</a></td>
+          <td>Grupo {m.group} — F{m.matchday}</td>
+          <td>{localHour(m.date)}</td>
+          <td><a href={site.watchUrl} rel="nofollow noopener" target="_blank">Ver ▶</a></td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p style="font-size:.85rem"><a href="/calendario">Ver calendario completo →</a></p>
+
+  <h2>Preguntas Frecuentes — Mundial 2026 en {countryName}</h2>
+  {faqs.map(({ q, a }) => (
+    <div style="margin-bottom:1rem">
+      <h3>{q}</h3>
+      <p>{a}</p>
+    </div>
+  ))}
+
+  <p style="margin-top:1.5rem">← <a href="/">Volver al inicio</a> · <a href="/calendario">Calendario</a></p>
+</BaseLayout>

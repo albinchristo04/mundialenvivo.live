@@ -1,0 +1,65 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/config/site";
+import { groupFixtures, multiTzBlock, formatDateEs } from "@/utils/fixtures";
+
+const matches = groupFixtures().sort(
+  (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+);
+
+const groups = [...new Set(matches.map((m) => m.group))].sort();
+
+const breadcrumbs = [
+  { name: "Inicio", item: site.url },
+  { name: "Calendario Mundial 2026", item: `${site.url}/calendario` },
+];
+---
+
+<BaseLayout
+  title="Calendario Mundial 2026: Horarios y Canales de Todos los Partidos"
+  description="Calendario completo del Mundial 2026 con horarios por país (Argentina, Colombia, México, Uruguay) y dónde ver cada partido gratis en PPVTV.TOP."
+  breadcrumbs={breadcrumbs}
+>
+  <h1>Calendario Mundial 2026 — Horarios y Canales de Todos los Partidos</h1>
+  <p>
+    Encontrá el horario de cada partido del <strong>Mundial 2026</strong> en tu país y el canal donde
+    podés verlo. Todos los partidos disponibles en
+    <a href={site.watchUrl} rel="nofollow noopener" target="_blank">{site.watchName}</a> gratis.
+  </p>
+
+  <a href={site.watchUrl} class="cta" rel="nofollow noopener" target="_blank">
+    ▶ Ver el Mundial en Vivo — {site.watchName}
+  </a>
+
+  {groups.map((g) => (
+    <section>
+      <h2>Grupo {g}</h2>
+      <table>
+        <thead>
+          <tr><th>Partido</th><th>Fecha</th><th>ARG/URU</th><th>COL/PER/ECU</th><th>CDMX</th><th>Ver</th></tr>
+        </thead>
+        <tbody>
+          {matches
+            .filter((m) => m.group === g)
+            .map((m) => {
+              const d = new Date(m.date);
+              const arg  = new Date(d.getTime() + -3 * 3600_000);
+              const col  = new Date(d.getTime() + -5 * 3600_000);
+              const cdmx = new Date(d.getTime() + -6 * 3600_000);
+              const fmt = (x: Date) => `${String(x.getUTCHours()).padStart(2,"0")}:${String(x.getUTCMinutes()).padStart(2,"0")}`;
+              return (
+                <tr>
+                  <td><a href={`/${m.slug}`}>{m.teamA} vs {m.teamB}</a></td>
+                  <td style="white-space:nowrap">{d.toLocaleDateString("es-AR",{day:"numeric",month:"short",timeZone:"UTC"})}</td>
+                  <td>{fmt(arg)}</td>
+                  <td>{fmt(col)}</td>
+                  <td>{fmt(cdmx)}</td>
+                  <td><a href={site.watchUrl} rel="nofollow noopener" target="_blank">Ver ▶</a></td>
+                </tr>
+              );
+            })}
+        </tbody>
+      </table>
+    </section>
+  ))}
+</BaseLayout>

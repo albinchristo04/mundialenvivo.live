@@ -20,7 +20,7 @@ const https = require("https");
 // Map each domain to its hosted key file. Fill these in.
 const KEYS = {
   "partidosdehoy.live":      process.env.KEY_PARTIDOS      || "REPLACE_ME",
-  "mundialenvivo.live":      process.env.KEY_MUNDIAL_LIVE  || "REPLACE_ME",
+  "mundialenvivo.live":      process.env.KEY_MUNDIAL_LIVE  || "7789e9f16e7343e3bc7abeee9e13b316",
   "mundialenvivo.sbs":       process.env.KEY_MUNDIAL_SBS   || "REPLACE_ME",
   "assistircopaaovivo.live": process.env.KEY_ASSISTIR      || "REPLACE_ME",
 };

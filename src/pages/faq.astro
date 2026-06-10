@@ -1,0 +1,73 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/config/site";
+
+const faqs = [
+  {
+    q: "¿Dónde puedo ver el Mundial 2026 gratis en vivo?",
+    a: `Podés ver el Mundial 2026 gratis en vivo en ${site.watchName} (${site.watchUrl}). Funciona sin registro en cualquier dispositivo: Android, iPhone, PC o Smart TV.`,
+  },
+  {
+    q: "¿A qué hora juega Argentina hoy en el Mundial?",
+    a: "Los horarios de Argentina para el Mundial 2026 dependen del día de partido. Consultá el calendario en esta página o buscá el partido específico para ver el horario exacto en hora argentina.",
+  },
+  {
+    q: "¿Qué canal transmite el Mundial 2026 en Argentina?",
+    a: `El Mundial 2026 se puede ver gratis en ${site.watchName}. Para la transmisión oficial también consultá TyC Sports y TV Pública en Argentina.`,
+  },
+  {
+    q: "¿Qué canal pasa el Mundial 2026 en Colombia?",
+    a: `En Colombia podés ver el Mundial 2026 gratis en ${site.watchName}. Las cadenas locales como Caracol TV y RCN también transmiten partidos seleccionados.`,
+  },
+  {
+    q: "¿Dónde ver el Mundial 2026 en Uruguay?",
+    a: `Desde Uruguay podés ver el Mundial 2026 en ${site.watchName} de forma gratuita. Los horarios para Uruguay son los mismos que Argentina (UTC−3).`,
+  },
+  {
+    q: "¿Cómo ver el Mundial 2026 en vivo desde el celular?",
+    a: `Para ver el Mundial 2026 desde tu celular, abrí ${site.watchUrl} en tu navegador. La transmisión está optimizada para móviles y no requiere instalar ninguna app.`,
+  },
+  {
+    q: "¿Cuándo empieza y cuándo termina el Mundial 2026?",
+    a: "El Mundial 2026 comienza el 11 de junio de 2026 con el partido inaugural en el Estadio Azteca (Ciudad de México) y finaliza con la gran final el 19 de julio de 2026.",
+  },
+  {
+    q: "¿Dónde se juega el Mundial 2026?",
+    a: "El Mundial 2026 se disputa en Estados Unidos, Canadá y México. Las sedes incluyen MetLife Stadium (Nueva York), AT&T Stadium (Dallas), SoFi Stadium (Los Ángeles), Estadio Azteca (Ciudad de México) y otras.",
+  },
+  {
+    q: "¿Cuántos equipos participan en el Mundial 2026?",
+    a: "El Mundial 2026 cuenta con 48 selecciones, el mayor número en la historia del torneo. Los equipos se dividen en 12 grupos de 4 equipos.",
+  },
+  {
+    q: "¿Es legal ver el Mundial 2026 en PPVTV.TOP?",
+    a: `${site.watchName} es un servicio de streaming en línea. Te recomendamos verificar las condiciones de uso del servicio. Esta página solo enlaza a transmisiones disponibles públicamente en internet.`,
+  },
+];
+
+const breadcrumbs = [
+  { name: "Inicio", item: site.url },
+  { name: "Preguntas frecuentes", item: `${site.url}/faq` },
+];
+---
+
+<BaseLayout
+  title="FAQ: Dónde Ver el Mundial 2026 en Vivo — Preguntas Frecuentes"
+  description="Preguntas frecuentes sobre dónde ver el Mundial 2026 en vivo gratis: horarios, canales por país y cómo ver online desde Argentina, Colombia, Uruguay y más."
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <h1>Preguntas Frecuentes — Dónde Ver el Mundial 2026 en Vivo</h1>
+  <p>Todo lo que necesitás saber sobre <strong>cómo y dónde ver el Mundial 2026 en vivo</strong> gratis online.</p>
+
+  {faqs.map(({ q, a }) => (
+    <div style="margin-bottom:1.25rem">
+      <h2 style="font-size:1.05rem">{q}</h2>
+      <p>{a}</p>
+    </div>
+  ))}
+
+  <p style="margin-top:1.5rem">
+    ← <a href="/">Volver al inicio</a> · <a href="/calendario">Ver calendario de partidos</a>
+  </p>
+</BaseLayout>
