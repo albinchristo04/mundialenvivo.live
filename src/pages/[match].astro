@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import PromoBanner from "@/components/PromoBanner.astro";
 import { site } from "@/config/site";
 import { fixtures, multiTzBlock, formatDateEs } from "@/utils/fixtures";
 import type { GetStaticPaths } from "astro";
@@ -19,6 +20,16 @@ const desc = `¿Dónde ver ${f.teamA} vs ${f.teamB} en vivo? Horarios por país,
 const tzBlock = multiTzBlock(f.date);
 const dateEs = formatDateEs(f.date);
 const isGroupStage = !!f.group;
+
+const STAGE_NAMES: Record<string, string> = {
+  r32: "Dieciseisavos de Final",
+  r16: "Octavos de Final",
+  qf: "Cuartos de Final",
+  sf: "Semifinal",
+  third: "Partido por el Tercer Puesto",
+  final: "Final",
+};
+const stageName = f.stage ? STAGE_NAMES[f.stage] : null;
 
 const faqs = [
   {
@@ -50,6 +61,8 @@ const breadcrumbs = [
   faqs={faqs}
   match={{ teamA: f.teamA, teamB: f.teamB, date: f.date, venue: f.venue, city: f.city, slug: f.slug }}
 >
+  <PromoBanner matchLabel={`${f.teamA} vs ${f.teamB}`} />
+
   <h1>¿Dónde Ver {f.teamA} vs {f.teamB} en Vivo? — Mundial 2026</h1>
 
   <!-- Answer above the fold -->
@@ -57,6 +70,7 @@ const breadcrumbs = [
     <div class="teams" style="font-size:1.35rem">{f.teamA} vs {f.teamB}</div>
     <div class="meta" style="margin:.3rem 0">{dateEs} · {f.venue}, {f.city}</div>
     {isGroupStage && <div class="meta">Grupo {f.group} — Fecha {f.matchday}</div>}
+    {stageName && <div class="meta">{stageName} — Mundial 2026</div>}
     <div class="tz-block" style="margin:.5rem 0">{tzBlock}</div>
     <a href={site.watchUrl} class="cta" rel="nofollow noopener" target="_blank" style="margin-top:.5rem">
       ▶ Ver {f.teamA} vs {f.teamB} en Vivo — {site.watchName}

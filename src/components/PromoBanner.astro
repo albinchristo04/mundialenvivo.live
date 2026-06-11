@@ -1,0 +1,62 @@
+---
+import { site } from "@/config/site";
+
+export interface Props {
+  /** Optional match label, e.g. "Argentina vs Argelia" */
+  matchLabel?: string;
+}
+
+const { matchLabel } = Astro.props;
+const text = matchLabel
+  ? `Ver ${matchLabel} EN VIVO GRATIS`
+  : "Ver el Mundial 2026 EN VIVO GRATIS";
+---
+
+<a class="promo-banner" href={site.watchUrl} rel="nofollow noopener" target="_blank">
+  <span class="live-dot" aria-hidden="true"></span>
+  <span class="promo-text">📺 {text} en <strong>{site.watchName}</strong></span>
+  <span class="promo-arrow" aria-hidden="true">▶</span>
+</a>
+
+<style>
+  .promo-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: linear-gradient(90deg, #b40000, #e02020, #b40000);
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    margin: 0 0 1.25rem;
+    box-shadow: 0 2px 8px rgba(180, 0, 0, 0.35);
+  }
+  .promo-banner:hover {
+    background: linear-gradient(90deg, #930000, #c01818, #930000);
+    color: #fff;
+  }
+  .promo-banner strong {
+    text-decoration: underline;
+  }
+  .live-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    flex-shrink: 0;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  .promo-arrow {
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.75); }
+  }
+  @media (max-width: 600px) {
+    .promo-banner { font-size: 0.85rem; padding: 0.6rem 0.75rem; }
+  }
+</style>
