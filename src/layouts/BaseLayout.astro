@@ -117,6 +117,9 @@ const fullTitle = title.includes(site.brand) ? title : `${title} | ${site.brand}
       th { text-align: left; padding: .5rem .75rem; background: #f3f4f6; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
       td { padding: .5rem .75rem; border-top: 1px solid #e5e7eb; }
       footer { margin-top: 3rem; border-top: 1px solid #e5e7eb; padding-top: 1.5rem; font-size: .8rem; color: #777; }
+      footer .follow-title { font-weight: 700; color: #444; margin-bottom: .25rem; }
+      footer .follow-links { margin-bottom: 1rem; }
+      footer .follow-links a { color: #0057b7; }
       @media (max-width: 600px) { h1 { font-size: 1.35rem; } }
     </style>
   </head>
@@ -137,8 +140,17 @@ const fullTitle = title.includes(site.brand) ? title : `${title} | ${site.brand}
     </main>
 
     <footer>
+      <p class="follow-title">Seguir las cuentas oficiales del Mundial 2026</p>
+      <p class="follow-links">
+        {site.officialAccounts.map((acc, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true"> · </span>}
+            <a href={acc.url} rel="nofollow noopener" target="_blank">{acc.name}</a>
+          </>
+        ))}
+      </p>
       <p>© 2026 {site.brand} · <a href={site.watchUrl} rel="nofollow noopener" target="_blank">{site.watchName}</a> · <a href="/faq">Preguntas frecuentes</a></p>
-      <p style="margin-top:.5rem">Ver <a href="https://www.fifa.com" rel="nofollow noopener" target="_blank">información oficial FIFA</a>.</p>
+      <p style="margin-top:.5rem">Ver <a href="https://www.fifa.com" rel="nofollow noopener" target="_blank">información oficial FIFA</a>. Mundial en Vivo no está afiliado a la FIFA.</p>
     </footer>
   </body>
 </html>
