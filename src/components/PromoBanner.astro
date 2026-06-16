@@ -14,8 +14,9 @@ const text = matchLabel
 
 <a class="promo-banner" href={site.watchUrl} rel="nofollow noopener" target="_blank">
   <span class="live-dot" aria-hidden="true"></span>
-  <span class="promo-text">📺 {text} en <strong>{site.watchName}</strong></span>
-  <span class="promo-arrow" aria-hidden="true">▶</span>
+  <span class="promo-label">Anuncio</span>
+  <span class="promo-text">{text} en <strong>{site.watchName}</strong></span>
+  <span class="promo-arrow" aria-hidden="true">></span>
 </a>
 
 <style>
@@ -41,6 +42,18 @@ const text = matchLabel
   .promo-banner strong {
     text-decoration: underline;
   }
+  .promo-label {
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 999px;
+    padding: 0.1rem 0.45rem;
+    font-size: 0.72rem;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .promo-text {
+    text-align: center;
+  }
   .live-dot {
     width: 10px;
     height: 10px;
@@ -57,6 +70,10 @@ const text = matchLabel
     50% { opacity: 0.4; transform: scale(0.75); }
   }
   @media (max-width: 600px) {
-    .promo-banner { font-size: 0.85rem; padding: 0.6rem 0.75rem; }
+    .promo-banner {
+      align-items: center;
+      font-size: 0.85rem;
+      padding: 0.6rem 0.75rem;
+    }
   }
 </style>

@@ -18,6 +18,15 @@ export interface Props {
 
 const { extra = [], breadcrumbs, faqs, match } = Astro.props;
 
+// Only include social profiles that are actually configured — broken/placeholder
+// sameAs URLs hurt entity trust in Bing.
+const sameAs = [
+  site.social.instagram && `https://www.instagram.com/${site.social.instagram}`,
+  site.social.facebook && `https://www.facebook.com/${site.social.facebook}`,
+  site.social.x && `https://x.com/${site.social.x}`,
+  site.social.youtube && `https://www.youtube.com/@${site.social.youtube}`,
+].filter(Boolean);
+
 const graphs: object[] = [
   {
     "@type": "Organization",
@@ -25,12 +34,8 @@ const graphs: object[] = [
     name: site.brand,
     url: `${site.url}/`,
     logo: `${site.url}/logo.png`,
-    sameAs: [
-      `https://www.instagram.com/${site.social.instagram}`,
-      `https://www.facebook.com/${site.social.facebook}`,
-      `https://x.com/${site.social.x}`,
-      `https://www.youtube.com/@${site.social.youtube}`,
-    ],
+    description: site.description,
+    ...(sameAs.length > 0 ? { sameAs } : {}),
   },
   {
     "@type": "WebSite",

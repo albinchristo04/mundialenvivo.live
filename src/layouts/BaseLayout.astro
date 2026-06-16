@@ -1,12 +1,14 @@
 ---
 import { site } from "@/config/site";
 import SchemaOrg from "@/components/SchemaOrg.astro";
+import PromoBanner from "@/components/PromoBanner.astro";
 
 export interface Props {
   title: string;
   description?: string;
   canonical?: string;
   ogImage?: string;
+  keywords?: string;
   breadcrumbs?: { name: string; item?: string }[];
   faqs?: { q: string; a: string }[];
   match?: {
@@ -24,10 +26,13 @@ const {
   description = site.description,
   canonical = Astro.url.href,
   ogImage = `${site.url}/og.png`,
+  keywords = site.defaultKeywords,
   breadcrumbs,
   faqs,
   match,
 } = Astro.props;
+
+const lastModified = new Date().toISOString();
 
 const fullTitle = title.includes(site.brand) ? title : `${title} | ${site.brand}`;
 ---
@@ -39,10 +44,35 @@ const fullTitle = title.includes(site.brand) ? title : `${title} | ${site.brand}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonical} />
+
+    <!-- Crawler directives (Bing reads bingbot-specific too) -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="bingbot" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+
+    <!-- Language & regional signals (Bing weighs these for regional ranking) -->
+    <meta http-equiv="content-language" content={site.lang} />
+    <meta name="language" content="Spanish" />
+    <meta name="geo.region" content="AR" />
+    <meta name="geo.placename" content="Argentina" />
+    <meta name="author" content={site.brand} />
+    <meta name="publisher" content={site.brand} />
+
+    <!-- Freshness signals -->
+    <meta name="revisit-after" content="1 day" />
+    <meta http-equiv="last-modified" content={lastModified} />
+
+    <!-- hreflang (Spanish LATAM targeting) -->
+    <link rel="alternate" hreflang="es" href={canonical} />
+    <link rel="alternate" hreflang="es-ar" href={canonical} />
+    <link rel="alternate" hreflang="es-419" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
 
     <!-- Open Graph / Bing Social -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.brand} />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
@@ -55,8 +85,8 @@ const fullTitle = title.includes(site.brand) ? title : `${title} | ${site.brand}
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Bing verification (add key after BWT setup) -->
-    <!-- <meta name="msvalidate.01" content="REPLACE_BING_KEY" /> -->
+    <!-- Bing Webmaster Tools verification -->
+    <meta name="msvalidate.01" content="F01125A32DD0550253E1CD24EAA0B21D" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -91,6 +121,8 @@ const fullTitle = title.includes(site.brand) ? title : `${title} | ${site.brand}
     </style>
   </head>
   <body>
+    <PromoBanner />
+
     <header>
       <a class="logo" href="/">{site.brand}</a>
       <nav>

@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import PromoBanner from "@/components/PromoBanner.astro";
 import { site } from "@/config/site";
 import { upcomingFixtures, multiTzBlock, formatDateEs } from "@/utils/fixtures";
 
@@ -34,8 +33,6 @@ const breadcrumbs = [{ name: "Inicio", item: site.url }];
   breadcrumbs={breadcrumbs}
   faqs={faqs}
 >
-  <PromoBanner />
-
   <h1>Mundial en Vivo 2026 — Dónde Verlo en Cada País</h1>
   <p>
     Bienvenido a la guía oficial para ver el <strong>Mundial 2026 en vivo</strong> online. Encontrás horarios por país,

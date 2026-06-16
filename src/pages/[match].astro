@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import PromoBanner from "@/components/PromoBanner.astro";
 import { site } from "@/config/site";
 import { fixtures, multiTzBlock, formatDateEs } from "@/utils/fixtures";
 import type { GetStaticPaths } from "astro";
@@ -16,6 +15,21 @@ const { fixture: f } = Astro.props;
 
 const title = `${f.teamA} vs ${f.teamB}: Dónde Ver en Vivo y a Qué Hora | Mundial 2026`;
 const desc = `¿Dónde ver ${f.teamA} vs ${f.teamB} en vivo? Horarios por país, transmisión gratis online en ${site.watchName}. ${f.teamA} vs ${f.teamB} ${f.teamA.toLowerCase().includes("argentina") || f.teamB.toLowerCase().includes("argentina") ? "— dónde ver en Argentina y toda Latinoamérica." : "Mundial 2026."}`;
+
+// Match-specific keywords — Bing rewards exact long-tail keyword matches.
+const A = f.teamA;
+const B = f.teamB;
+const keywords = [
+  `${A} vs ${B} en vivo`,
+  `${A} vs ${B} online`,
+  `ver ${A} vs ${B} gratis`,
+  `${A} vs ${B} a qué hora`,
+  `${A} vs ${B} dónde ver`,
+  `${A} ${B} mundial 2026`,
+  `${A} vs ${B} transmisión en vivo`,
+  "mundial 2026 en vivo",
+  "ver mundial 2026 gratis",
+].join(", ");
 
 const tzBlock = multiTzBlock(f.date);
 const dateEs = formatDateEs(f.date);
@@ -56,13 +70,12 @@ const breadcrumbs = [
 <BaseLayout
   title={title}
   description={desc}
+  keywords={keywords}
   canonical={`${site.url}/${f.slug}`}
   breadcrumbs={breadcrumbs}
   faqs={faqs}
   match={{ teamA: f.teamA, teamB: f.teamB, date: f.date, venue: f.venue, city: f.city, slug: f.slug }}
 >
-  <PromoBanner matchLabel={`${f.teamA} vs ${f.teamB}`} />
-
   <h1>¿Dónde Ver {f.teamA} vs {f.teamB} en Vivo? — Mundial 2026</h1>
 
   <!-- Answer above the fold -->
