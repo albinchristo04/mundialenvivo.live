@@ -93,6 +93,15 @@ const fullTitle = title.includes(site.brand) ? title : `${title} | ${site.brand}
 
     <SchemaOrg breadcrumbs={breadcrumbs} faqs={faqs} match={match} />
 
+    <!-- Google Analytics -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-V0GQL3RG1W"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-V0GQL3RG1W');
+    </script>
+
     <style>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       html { font-family: system-ui, -apple-system, sans-serif; font-size: 16px; color: #111; background: #fff; }
