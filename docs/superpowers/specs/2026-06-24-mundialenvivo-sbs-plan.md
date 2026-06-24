@@ -209,7 +209,95 @@ Also sweep for stream-promise copy: `gratis online`, `ver gratis`,
 
 ---
 
-## 6. SEO Identity (new, not reused)
+## 6. Keyword & Search-Term Targets (from `.live` GSC data)
+
+Source: `mundialenvivo.live` Search Console export, last 7 days ending 2026-06-21
+(10,917 clicks / 226,704 impressions across 1,000 queries). Because `.sbs` reuses
+the same content for the same Spanish-speaking Latin American audience, this is the
+exact demand the new site should be built to capture. Note `.sbs` starts ranking
+from zero — these are *targets*, not inherited rankings.
+
+### 6.1 Primary keywords (build the homepage `<title>`/`<h1>`/meta around these)
+The single dominant term and its closest variants drive most traffic:
+
+| Query | Clicks | Impr | Pos | CTR |
+|-------|-------:|-----:|:---:|:---:|
+| mundial en vivo | 4,129 | 82,272 | 5.7 | 5.0% |
+| ver mundial en vivo | 674 | 2,851 | 4.3 | 23.6% |
+| partidos del mundial en vivo | 626 | 11,107 | 7.1 | 5.6% |
+| mundial en vivo 2026 | 299 | 14,738 | 5.4 | 2.0% |
+| ver partidos del mundial en vivo | 289 | 1,448 | 5.0 | 20.0% |
+| mundial live | 255 | 1,846 | 3.2 | 13.8% |
+
+Homepage should target the cluster **"(ver) mundial en vivo (2026)"** + **"partidos
+del mundial en vivo"**. Keep the exact phrase "mundial en vivo" in title, H1, and
+first paragraph.
+
+### 6.2 Intent clusters (shape site structure & copy)
+
+| Cluster | Clicks | Impr | Queries | Use for |
+|---------|-------:|-----:|:-------:|---------|
+| core "mundial en vivo" | 6,298 | 116,979 | 262 | Homepage |
+| "partido(s) del mundial" | 2,740 | 62,871 | 359 | Calendario + match pages |
+| "ver / dónde ver" intent | 1,960 | 14,123 | 142 | Official "dónde ver" framing everywhere (high CTR: 11–24%) |
+| "2026"-tagged | 1,578 | 51,247 | 255 | Include "2026" in titles/H1s |
+| "hoy" (today) | 105 | 5,049 | 52 | A "partidos de hoy" view on calendario |
+| "fútbol en vivo" | 144 | 5,613 | 73 | Secondary keyword in copy |
+| "canal / transmisión" | 115 | 2,135 | 30 | **Aligns perfectly with official-broadcaster content** |
+| "gratis" | 7 | 26 | 9 | **Negligible — do NOT build around "gratis".** Confirms the legitimacy pivot costs ~0 demand |
+
+Key takeaway: the "ver / dónde ver" and "canal / transmisión" intent (which an
+official-broadcaster guide serves natively) is large, while "gratis" stream intent
+is effectively zero. The `.sbs` positioning matches real demand.
+
+### 6.3 Recommended keyword → page mapping
+
+- **Homepage** (`index.astro`): `mundial en vivo`, `ver mundial en vivo`,
+  `mundial en vivo 2026`, `partidos del mundial en vivo`, `mundial live`.
+- **Calendario** (`calendario.astro`): `partidos del mundial`, `partidos del mundial
+  en vivo`, `mundial en vivo hoy`, `partidos de hoy mundial 2026`.
+- **Match pages** (`[match].astro`): `<equipo> vs <equipo> dónde ver`,
+  `<equipo> vs <equipo> en vivo`, `partido <equipo> mundial 2026`.
+- **Country pages**: `mundial 2026 en <país>`, `dónde ver el mundial en <país>`,
+  `canal oficial mundial 2026 <país>` — **this is the growth lever.** Country/match
+  queries are absent from `.live`'s top set because those pages never ranked; build
+  `.sbs` to capture them and diversify away from the single-homepage dependency.
+- **Brand**: own `mundialenvivo`, `mundialenvivohd`, `vermundialenvivo` (real brand
+  searches, 70+ clicks) — ensure brand name appears in title/footer/schema.
+
+### 6.4 CTR quick-wins (write compelling titles/metas — page-1 already)
+These already rank on page 1 but bleed clicks to low CTR. Better titles/descriptions
+roughly double clicks with no ranking change needed:
+
+| Query | Impr | Pos | CTR | Target |
+|-------|-----:|:---:|:---:|:------:|
+| mundial en vivo 2026 | 14,738 | 5.4 | 2.0% | ≥6% |
+| partido del mundial en vivo | 6,734 | 6.8 | 1.8% | ≥5% |
+| partido en vivo del mundial | 5,765 | 7.1 | 1.5% | ≥5% |
+| mundial 2026 en vivo | 5,371 | 9.7 | 2.2% | ≥5% |
+| el mundial en vivo | 5,058 | 6.9 | 2.7% | ≥6% |
+| mundial en vivo hoy | 3,729 | 8.1 | 2.2% | ≥6% |
+
+Write titles with the exact query phrase + a clear hook (year, "dónde ver",
+"canales oficiales por país", live/"EN VIVO"). Meta descriptions should state what
+the page delivers (official broadcaster per country + schedule).
+
+### 6.5 Audience (from GSC Countries — prioritize broadcaster data accordingly)
+Top markets by clicks: Peru (2,153), Mexico (1,759), Venezuela (1,013), Ecuador
+(730), Argentina (633), Guatemala (597), El Salvador (593), Chile (581), Costa Rica
+(538), Bolivia (487), Colombia (402), Panama (401). **Verify §4.3 official
+broadcasters for these countries first** — that's where the traffic is. Note several
+high-traffic markets (Guatemala, El Salvador, Costa Rica, Panama, Bolivia) are NOT
+in the current `focusCountries` list — consider adding country pages for them.
+
+### 6.6 Device note
+Mobile = 182,089 impressions at 3.78% CTR vs Desktop 57,613 at 8.58% (similar
+positions). The mobile CTR gap is the biggest single leak — ensure titles aren't
+truncated on mobile SERPs (front-load the keyword, keep titles ~55–60 chars).
+
+---
+
+## 7. SEO Identity (new, not reused)
 
 - New Google Search Console property for `mundialenvivo.sbs` (verify via DNS or
   HTML file).
@@ -222,7 +310,7 @@ Also sweep for stream-promise copy: `gratis online`, `ver gratis`,
 
 ---
 
-## 7. Deploy (VPS, same pattern as `.live`)
+## 8. Deploy (VPS, same pattern as `.live`)
 
 Static Astro → serve the `dist/` folder via aaPanel/nginx (NOT a Node project).
 
@@ -238,7 +326,7 @@ Static Astro → serve the `dist/` folder via aaPanel/nginx (NOT a Node project)
 
 ---
 
-## 8. Build / Verification Checklist
+## 9. Build / Verification Checklist
 
 - [ ] `npm run build` completes; page count matches `.live` (~115 pages).
 - [ ] `grep -rI ppvtv` over the project returns nothing.
@@ -253,7 +341,7 @@ Static Astro → serve the `dist/` folder via aaPanel/nginx (NOT a Node project)
 
 ---
 
-## 9. Compliance Note (why this matters)
+## 10. Compliance Note (why this matters)
 
 The `.live` suspension was an abuse/rights complaint, not a hosting fault — moving
 hosts does not resolve it, and the same complaint will follow any site that links
