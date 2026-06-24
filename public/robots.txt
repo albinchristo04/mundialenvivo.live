@@ -1,20 +1,9 @@
 # Mundial en Vivo 2026 — robots.txt
 # https://mundialenvivo.live
 
+# Allow all bots full access
 User-agent: *
 Allow: /
 
-# Bing — explicit allow + crawl guidance
-User-agent: bingbot
-Allow: /
-Crawl-delay: 1
-
-User-agent: msnbot
-Allow: /
-
-# Google
-User-agent: Googlebot
-Allow: /
-
-# Sitemap (auto-discovered by Bing & Google)
+# Sitemap (auto-discovered by all engines)
 Sitemap: https://mundialenvivo.live/sitemap.xml
