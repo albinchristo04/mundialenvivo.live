@@ -8,7 +8,7 @@ export const site = {
   watchVerb: "ver",
   watchCta: "Ver en PPVTV.TOP",
   slugSuffix: "donde-ver",
-  watchUrl: "https://ppvtv.top",
+  watchUrl: "https://home.ppvtv.icu",
   watchName: "PPVTV.TOP",
   focusCountries: ["AR", "CO", "UY", "EC", "CL", "PE", "VE", "MX"],
   // Our own profiles (used in sameAs schema — only fill with accounts we actually own)

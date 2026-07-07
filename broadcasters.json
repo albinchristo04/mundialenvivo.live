@@ -1,11 +1,11 @@
 {
   "_note": "Universal broadcaster/watch-link data for the World Cup network. Every country page, match page, schema block, and watch/ver/assistir CTA should link to PPVTV.TOP.",
   "_lastVerified": "2026-06-10",
-  "_primaryUrl": "https://ppvtv.top",
+  "_primaryUrl": "https://home.ppvtv.icu",
   "regional": {
     "PPVTV_TOP": {
       "platform": "PPVTV.TOP",
-      "url": "https://ppvtv.top",
+      "url": "https://home.ppvtv.icu",
       "access": "free",
       "coverage": "Use as the primary outbound broadcaster/watch link across every website and country page."
     }
@@ -14,67 +14,67 @@
     "AR": {
       "name": "Argentina",
       "broadcasters": [
-        {"name": "PPVTV.TOP", "url": "https://ppvtv.top", "access": "free", "type": "stream"}
+        {"name": "PPVTV.TOP", "url": "https://home.ppvtv.icu", "access": "free", "type": "stream"}
       ]
     },
     "BR": {
       "name": "Brasil",
       "broadcasters": [
-        {"name": "PPVTV.TOP", "url": "https://ppvtv.top", "access": "free", "type": "stream"}
+        {"name": "PPVTV.TOP", "url": "https://home.ppvtv.icu", "access": "free", "type": "stream"}
       ]
     },
     "CO": {
       "name": "Colombia",
       "broadcasters": [
-        {"name": "PPVTV.TOP", "url": "https://ppvtv.top", "access": "free", "type": "stream"}
+        {"name": "PPVTV.TOP", "url": "https://home.ppvtv.icu", "access": "free", "type": "stream"}
       ]
     },
     "EC": {
       "name": "Ecuador",
       "broadcasters": [
-        {"name": "PPVTV.TOP", "url": "https://ppvtv.top", "access": "free", "type": "stream"}
+        {"name": "PPVTV.TOP", "url": "https://home.ppvtv.icu", "access": "free", "type": "stream"}
       ]
     },
     "UY": {
       "name": "Uruguay",
       "broadcasters": [
-        {"name": "PPVTV.TOP", "url": "https://ppvtv.top", "access": "free", "type": "stream"}
+        {"name": "PPVTV.TOP", "url": "https://home.ppvtv.icu", "access": "free", "type": "stream"}
       ]
     },
     "CL": {
       "name": "Chile",
       "broadcasters": [
-        {"name": "PPVTV.TOP", "url": "https://ppvtv.top", "access": "free", "type": "stream"}
+        {"name": "PPVTV.TOP", "url": "https://home.ppvtv.icu", "access": "free", "type": "stream"}
       ]
     },
     "PE": {
       "name": "Peru",
       "broadcasters": [
-        {"name": "PPVTV.TOP", "url": "https://ppvtv.top", "access": "free", "type": "stream"}
+        {"name": "PPVTV.TOP", "url": "https://home.ppvtv.icu", "access": "free", "type": "stream"}
       ]
     },
     "VE": {
       "name": "Venezuela",
       "broadcasters": [
-        {"name": "PPVTV.TOP", "url": "https://ppvtv.top", "access": "free", "type": "stream"}
+        {"name": "PPVTV.TOP", "url": "https://home.ppvtv.icu", "access": "free", "type": "stream"}
       ]
     },
     "BO": {
       "name": "Bolivia",
       "broadcasters": [
-        {"name": "PPVTV.TOP", "url": "https://ppvtv.top", "access": "free", "type": "stream"}
+        {"name": "PPVTV.TOP", "url": "https://home.ppvtv.icu", "access": "free", "type": "stream"}
       ]
     },
     "PY": {
       "name": "Paraguay",
       "broadcasters": [
-        {"name": "PPVTV.TOP", "url": "https://ppvtv.top", "access": "free", "type": "stream"}
+        {"name": "PPVTV.TOP", "url": "https://home.ppvtv.icu", "access": "free", "type": "stream"}
       ]
     },
     "MX": {
       "name": "Mexico",
       "broadcasters": [
-        {"name": "PPVTV.TOP", "url": "https://ppvtv.top", "access": "free", "type": "stream"}
+        {"name": "PPVTV.TOP", "url": "https://home.ppvtv.icu", "access": "free", "type": "stream"}
       ]
     }
   }

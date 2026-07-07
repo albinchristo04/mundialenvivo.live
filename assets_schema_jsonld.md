@@ -66,7 +66,7 @@ One per fixture. Add a BroadcastEvent for PPVTV.TOP using the URL from `broadcas
     {
       "@type": "BroadcastEvent",
       "name": "{{Equipo A}} vs {{Equipo B}} — ver en PPVTV.TOP",
-      "url": "https://ppvtv.top",
+      "url": "https://home.ppvtv.icu",
       "isLiveBroadcast": true,
       "videoFormat": "HD",
       "broadcastOfEvent": {"@type": "SportsEvent", "name": "{{Equipo A}} vs {{Equipo B}}"},
